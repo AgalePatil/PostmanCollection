@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "564a3467-8ba8-41c9-8681-c1421b39ae66",
+		"name": "Library",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22460848"
+	},
+	"item": [
+		{
+			"name": "Add Book Ankush",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const company=pm.globals.get(\"companyCode\");\r",
+							" const ran=pm.variables.replaceIn('{{$randomInt}}');\r",
+							" console.info(ran)\r",
+							"pm.collectionVariables.set(\"ISBN\",company+ran);\r",
+							"pm.iterationData.set(\"ISBN\",company+ran);\r",
+							"const book=pm.iterationData.get(\"BOOKNAME\");\r",
+							"pm.collectionVariables.set(\"Book_Name\",book);\r",
+							"\r",
+							"const author=pm.iterationData.get(\"AuthorName\");\r",
+							"pm.collectionVariables.set(\"Author_name\",author);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"const authorname=pm.collectionVariables.get(\"Author_name\");\r",
+							"console.log(authorname)\r",
+							"const JSONDATA=pm.response.json();\r",
+							"console.log(JSONDATA);\r",
+							"const bookid=JSONDATA.ID;\r",
+							"pm.collectionVariables.set(\"BOOK_ID\",bookid);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\":\"{{Book_Name}}\",\r\n\"isbn\":\"{{ISBN}}\",\r\n\"aisle\":\"111\",\r\n\"author\":\"{{Author_name}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/Library/Addbook.php",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"Library",
+						"Addbook.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Book Name By ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const JSONDATA=pm.response.json();\r",
+							"console.log(JSONDATA);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://rahulshettyacademy.com/Library/GetBook.php?ID={{BOOK_ID}}",
+					"protocol": "https",
+					"host": [
+						"rahulshettyacademy",
+						"com"
+					],
+					"path": [
+						"Library",
+						"GetBook.php"
+					],
+					"query": [
+						{
+							"key": "ID",
+							"value": "{{BOOK_ID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteBook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const JSONDATA=pm.response.json();\r",
+							"console.log(JSONDATA);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \r\n\"ID\" : \"{{BOOK_ID}}\"\r\n \r\n} \r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/Library/DeleteBook.php",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"Library",
+						"DeleteBook.php"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "ISBN",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "BOOK_ID",
+			"value": ""
+		},
+		{
+			"key": "Author_name",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "Book_Name",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
