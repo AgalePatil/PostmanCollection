@@ -1,0 +1,211 @@
+{
+	"info": {
+		"_postman_id": "2db95479-763d-40a9-894e-1f1f38bc0d71",
+		"name": "CRUD_OPERATION_OF_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22460848"
+	},
+	"item": [
+		{
+			"name": " Google Maps Add API (POST)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"// const authorname=pm.collectionVariables.get(\"Author_name\");\r",
+							"// console.log(authorname)\r",
+							"\r",
+							"\r",
+							"const JSONDATA=pm.response.json();\r",
+							"console.log(JSONDATA);\r",
+							"const bookid=JSONDATA.place_id;\r",
+							"pm.collectionVariables.set(\"location_id\",bookid);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"location\": {\r\n    \"lat\": -38.383494,\r\n    \"lng\": 33.427362\r\n  },\r\n  \"accuracy\": 50,\r\n  \"name\": \"Harprit Barar\",\r\n  \"phone_number\": \"(+91) 983 893 3937\",\r\n  \"address\": \"29, side layout, cohen 09\",\r\n  \"types\": [\r\n    \"shoe park\",\r\n    \"shop\"\r\n  ],\r\n  \"website\": \"http://google.com\",\r\n  \"language\": \"French-IN\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url_cl}}maps/api/place/add/json?key =qaclick123",
+					"host": [
+						"{{base_url_cl}}maps"
+					],
+					"path": [
+						"api",
+						"place",
+						"add",
+						"json"
+					],
+					"query": [
+						{
+							"key": "key ",
+							"value": "qaclick123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Google Maps get Place  API   (GET)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "Complete URL : http://rahulshettyacademy.com/maps/api/place/get/json?place_id={{location_id}}&key=qaclick123",
+					"protocol": "Complete URL : http",
+					"host": [
+						"rahulshettyacademy",
+						"com"
+					],
+					"path": [
+						"maps",
+						"api",
+						"place",
+						"get",
+						"json"
+					],
+					"query": [
+						{
+							"key": "place_id",
+							"value": "{{location_id}}"
+						},
+						{
+							"key": "key",
+							"value": "qaclick123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Google Maps Put Place API  (PUT)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"place_id\":\"{{location_id}}\",\r\n\"address\":\"70 Summer walk, USA\",\r\n\"key\":\"qaclick123\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url_cl}}maps/api/place/update/json?place_id={{location_id}}&key=qaclick123",
+					"host": [
+						"{{base_url_cl}}maps"
+					],
+					"path": [
+						"api",
+						"place",
+						"update",
+						"json"
+					],
+					"query": [
+						{
+							"key": "place_id",
+							"value": "{{location_id}}"
+						},
+						{
+							"key": "key",
+							"value": "qaclick123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Google Maps Delete API",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"place_id\":\"{{location_id}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url_cl}}/maps/api/place/delete/json?place_id={{location_id}}&key=qaclick123",
+					"host": [
+						"{{base_url_cl}}"
+					],
+					"path": [
+						"maps",
+						"api",
+						"place",
+						"delete",
+						"json"
+					],
+					"query": [
+						{
+							"key": "place_id",
+							"value": "{{location_id}}"
+						},
+						{
+							"key": "key",
+							"value": "qaclick123"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "location_id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "base_url_cl",
+			"value": "https://rahulshettyacademy.com/",
+			"type": "string"
+		}
+	]
+}
